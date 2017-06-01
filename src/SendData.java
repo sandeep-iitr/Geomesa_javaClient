@@ -18,18 +18,19 @@ public class SendData {
 
 		HttpClient httpClient = HttpClientBuilder.create().build(); //Use this instead 
 		try {
-
-		    HttpPost request = new HttpPost("http://localhost:8083/WebApp/PutData2");
+			//System.out.println("Sending Data:");
+			
+		    HttpPost request = new HttpPost("http://localhost:8080/WebApp2/PutData2");
 		    
 		    //StringEntity params =new StringEntity("details={\"name\":\"myname\",\"age\":\"20\"} ");
 		    
-		    Double MIN_X = -79.5;
-	        Double MIN_Y =  37.0;
+		    double MIN_X = -79.5;
+	        double MIN_Y =  37.0;
 	        DateTime MIN_DATE = new DateTime(2016, 1, 1, 0, 0, 0, DateTimeZone.forID("UTC"));
 	        Random random = new Random(5771);
-	        Double DX = 2.0;
-	        Double DY = 2.0;
-	        Long SECONDS_PER_YEAR = 365L * 24L * 60L * 60L;
+	        double DX = 2.0;
+	        double DY = 2.0;
+	        long SECONDS_PER_YEAR = 365L * 24L * 60L * 60L;
 	        
 	       
 	        double x = MIN_X + random.nextDouble() * DX;
@@ -41,11 +42,11 @@ public class SendData {
 		    Data.put("data_type", "temperature");
 		    Data.put("unit", "degree celcius");
 		    Data.put("value", "25");
-		    Data.put("timeStamp", dateTime.getMillis());
+		    Data.put("timeStamp", Long.toString(dateTime.getMillis()));
 		    
 		    JSONObject Coord = new JSONObject();
-		    Coord.put("lat", x);
-		    Coord.put("lng", y);
+		    Coord.put("lat", Double.toString(x));
+		    Coord.put("lng", Double.toString(y));
 		    
 		    Data.put("location", Coord);
 		    
